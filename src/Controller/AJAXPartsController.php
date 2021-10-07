@@ -18,9 +18,11 @@ class AJAXPartsController extends AbstractController
     public function index(Request $request): Response
     {
         $json = json_decode($request->getContent());
-        $url = "https://api.optad360.com/get?key=HJGHcZvJHZhjgew6qe67q6GHcZv3fdsAqxbvB33fdV&startDate=2021-08-11&endDate=2021-08-11&output=json";
+        $url = "https://api.optad360.com/get?key=HJGHcZvJHZhjgew6qe67q6GHcZv3fdsAqxbvB33fdV&startDate=2021-08-11&endDate=2021-08-11&output=json&currency=".$json->currency;
+        dump($url);
         $data = file_get_contents($url);
         dump(json_decode($data));
+        dump($json->currency);
         return new Response ($data);
 
         /*return $this->render('main/index.html.twig', [

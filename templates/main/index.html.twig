@@ -11,7 +11,13 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    <button class="btn btn-primary" onclick="request()">Send Request to OptAd360 TestApi</button>
+    <button class="btn btn-primary" onclick="request()">Send Request to OptAd360 TestApi</button> <label for="sel">Currency</label>
+	<select name="sel" id="select" onchange="processChange()">
+		<option selected value="1">PLN</option>
+		<option value="2">EUR</option>
+		<option value="3">USD</option>
+		<option value="4">GBP</option>
+	</select>
     <p id="output"> </p>
 </div>
 {% endblock %}
@@ -28,7 +34,7 @@ function request()
 		url: url,
 		method: "post", 
 		data: JSON.stringify(
-			{'data':'data'})
+			{'currency':$("#select option:selected").text()})
 		})
 	.done(res => 
 	{ 
