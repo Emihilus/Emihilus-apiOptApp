@@ -31,7 +31,7 @@ class MainController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $opts = $em->getRepository(OptAd::class)->findAll();
 
-        return $this->render('main/index.html.twig', [
+        return $this->render('main/second.html.twig', [
             'controller_name' => 'MainController',
             'opts' => $opts
         ]);
