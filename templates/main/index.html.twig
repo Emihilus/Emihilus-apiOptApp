@@ -24,6 +24,7 @@
 <table class="table table-secondary table-hover">
   <theadclass="thead-dark">
     <tr>
+      <th scope="col">Origin</th>
       <th scope="col">Currency</th>
       <th scope="col">URLs</th>
       <th scope="col">Tags</th>
@@ -69,7 +70,7 @@ function request()
             $("#output").html(res)
             json.data.forEach(function(data)
             {
-                let tdHtml = '<td scope="row">'+$("#select option:selected").text()+'</td>';
+                let tdHtml = '<td scope="row">now(frontend ajax call)</td><td scope="row">'+$("#select option:selected").text()+'</td>';
                 data.forEach(function(fe)
                 {
                     tdHtml += `<td scope="row">${fe}</td>`

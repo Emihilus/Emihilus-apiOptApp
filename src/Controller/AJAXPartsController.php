@@ -31,14 +31,27 @@ class AJAXPartsController extends AbstractController
             return new Response('0');
         }
 
+        $em = $this->getDoctrine()->getManager();
         $apiJson = json_decode($data);
+        foreach ($apiJson->data as $row) 
+        {
+            $opt = new OptAd;
+            $opt->setCurrency($json->currency);
+            $opt->setUrls($row[0]);
+            $opt->setTags($row[1]);
+            $opt->setDate($row[2]);
+            $opt->setEstimatedRevenue($row[3]);
+            $opt->setAdImpressions($row[4]);
+            $opt->setAdEcpm($row[5]);
+            $opt->setClicks($row[6]);
+            $opt->setAdCtr($row[7]);
+            
+            $em->persist($opt);
+        }
 
-        $opt = new OptAd;
-        $opt->setCurrency($json->currency);
-        $opt->setUrls($apiJson->URLs);
-        $opt->setTags($apiJson->Tags);
-        $opt->setDate($apiJson->DATE);
-        $opt->setEstimatedRevenue($apiJson->)
+
+        $em->flush();
+        
 
 
         return new Response ($data);
