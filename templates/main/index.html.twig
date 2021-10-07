@@ -11,10 +11,30 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/opt/web-projects/apiOptApp/src/Controller/MainController.php'|file_link(0) }}">src/Controller/MainController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/opt/web-projects/apiOptApp/templates/main/index.html.twig'|file_link(0) }}">templates/main/index.html.twig</a></code></li>
-    </ul>
+    <button class="btn btn-primary">Send Request to OptAd360 TestApi</button>
+    <p id="output"> </p>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script>
+function request()
+{
+	let url = "https://api.optad360.com/get?key=HJGHcZvJHZhjgew6qe67q6GHcZv3fdsAqxbvB33fdV&startDate=2021-08-11&endDate=2021-08-11&output=json";
+
+	$.ajax({
+		url: url,
+		method: "get"})
+	.done(res => 
+	{ 
+		console.log(res);
+		if(res.result == 1)
+		{
+			$("#comment-"+commentId).remove();
+		}
+	});
+}
+</script>
 {% endblock %}
