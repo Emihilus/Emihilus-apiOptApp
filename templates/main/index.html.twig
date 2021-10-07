@@ -24,10 +24,15 @@
 <table class="table table-secondary table-hover">
   <theadclass="thead-dark">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Oferta</th>
-      <th scope="col">Użytkownik</th>
-      <th class="d-none d-sm-table-cell" scope="col">Data</th>
+      <th scope="col">Currency</th>
+      <th scope="col">URLs</th>
+      <th scope="col">Tags</th>
+      <th scope="col">Date</th>
+      <th scope="col">Estimated revenue</th>
+      <th scope="col">Ad impressions</th>
+      <th scope="col">Ad eCPM</th>
+      <th scope="col">Clicks</th>
+      <th scope="col">Ad CTR</th>
     </tr>
   </thead>
   <tbody id="hed">
@@ -36,7 +41,7 @@
             <th class="throw" scope="row">{#{ loop.index }#}</th>
             <td>{#{offer.value/100}#} PLN</td>
             <td>{#{offer.byUser.username}#}</td>
-            <td class="d-none d-sm-table-cell">{#{offer.createdAt|date('H:m d-m-Y')}#}</td>
+            <td>{#{offer.createdAt|date('H:m d-m-Y')}#}</td>
         </tr>
     {#% endfor %#}
   </tbody>
@@ -62,12 +67,15 @@ function request()
 		})
 	.done(res => 
 	{ 
-		console.log(JSON.parse(res));
+        let json = JSON.parse(res);
+		console.log();
         $("#output").html(res)
-		/*if(res.result == 1)
-		{
-			$("#comment-"+commentId).remove();
-		}*/
+
+        let trc = document.createElement('tr');
+        trc.innerHTML = `<td scope="row">${json.}</td><td>'+offerValue+' PLN</td><td>{{app.user}}</td><td class="d-none d-sm-table-cell">Teraz</td>`;
+        document.getElementById('hed').prepend(trc);
+
+		
 	});
 }
 </script>
