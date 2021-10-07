@@ -22,15 +22,18 @@
 <script>
 function request()
 {
-    var proxy = 'https://cors-anywhere.herokuapp.com/';
-	let url = "https://api.optad360.com/get?key=HJGHcZvJHZhjgew6qe67q6GHcZv3fdsAqxbvB33fdV&startDate=2021-08-11&endDate=2021-08-11&output=json";
+	let url = "{{path ('getOptAd360') }}";
 
 	$.ajax({
-		url: 'https://danepubliczne.imgw.pl/api/data/synop',
-		method: "get"})
+		url: url,
+		method: "post", 
+		data: JSON.stringify(
+			{'data':'data'})
+		})
 	.done(res => 
 	{ 
 		console.log(res);
+        $("#output").html(res)
 		/*if(res.result == 1)
 		{
 			$("#comment-"+commentId).remove();
