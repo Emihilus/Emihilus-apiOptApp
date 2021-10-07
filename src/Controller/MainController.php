@@ -14,9 +14,20 @@ class MainController extends AbstractController
      */
     public function index(): Response
     {
-        /*$url = "https://api.optad360.com/get?key=HJGHcZvJHZhjgew6qe67q6GHcZv3fdsAqxbvB33fdV&startDate=2021-08-11&endDate=2021-08-11&output=json";
+        $em = $this->getDoctrine()->getManager();
+        $opts = $em->getRepository(OptAd::class)->findAll();
 
-        dump(file_get_contents($url));*/
+        return $this->render('main/index.html.twig', [
+            'controller_name' => 'MainController',
+            'opts' => $opts
+        ]);
+    }
+
+    /**
+     * @Route("/sec", name="second")
+     */
+    public function sec(): Response
+    {
         $em = $this->getDoctrine()->getManager();
         $opts = $em->getRepository(OptAd::class)->findAll();
 
