@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\OptAd;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,9 +22,25 @@ class AJAXPartsController extends AbstractController
         $json = json_decode($request->getContent());
         $url = "https://api.optad360.com/get?key=HJGHcZvJHZhjgew6qe67q6GHcZv3fdsAqxbvB33fdV&startDate=2021-08-11&endDate=2021-08-11&output=json&currency=".$json->currency;
         dump($url);
-        $data = file_get_contents($url);
-        dump(json_decode($data));
-        dump($json->currency);
+        try
+        {
+            $data = file_get_contents($url);
+        }
+        catch(Exception $e)
+        {
+            return new Response('0');
+        }
+
+        $apiJson = json_decode($data);
+
+        $opt = new OptAd;
+        $opt->setCurrency($json->currency);
+        $opt->setUrls($apiJson->URLs);
+        $opt->setTags($apiJson->Tags);
+        $opt->setDate($apiJson->DATE);
+        $opt->setEstimatedRevenue($apiJson->)
+
+
         return new Response ($data);
 
         /*return $this->render('main/index.html.twig', [

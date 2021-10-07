@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=OptAdRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class OptAd
 {
@@ -190,5 +191,13 @@ class OptAd
         $this->requested_at = $requested_at;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function autoSetRequestedAt()
+    {
+        $this->requested_at = new \DateTime();
     }
 }

@@ -60,21 +60,26 @@ function request()
 		})
 	.done(res => 
 	{ 
-        let json = JSON.parse(res);
-		console.log(json);
-        $("#output").html(res)
-        json.data.forEach(function(data)
+        if (res == '0')
+            alert("Request failed");
+        else
         {
-            let tdHtml = '<td scope="row">'+$("#select option:selected").text()+'</td>';
-            data.forEach(function(fe)
+            let json = JSON.parse(res);
+            console.log(json);
+            $("#output").html(res)
+            json.data.forEach(function(data)
             {
-                tdHtml += `<td scope="row">${fe}</td>`
-            });
+                let tdHtml = '<td scope="row">'+$("#select option:selected").text()+'</td>';
+                data.forEach(function(fe)
+                {
+                    tdHtml += `<td scope="row">${fe}</td>`
+                });
 
-        let trc = document.createElement('tr');
-        trc.innerHTML = tdHtml;
-        document.getElementById('hed').prepend(trc);
-        });
+            let trc = document.createElement('tr');
+            trc.innerHTML = tdHtml;
+            document.getElementById('hed').prepend(trc);
+            });
+        }
         
 
 		
