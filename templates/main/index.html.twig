@@ -24,7 +24,7 @@
 <table class="table table-secondary table-hover">
   <theadclass="thead-dark">
     <tr>
-      <th scope="col">Origin</th>
+      <th scope="col">Requested at</th>
       <th scope="col">Currency</th>
       <th scope="col">URLs</th>
       <th scope="col">Tags</th>
@@ -37,7 +37,20 @@
     </tr>
   </thead>
   <tbody id="hed">
-    
+     {% for opt in opts %} 
+     <tr>
+        <td>{{opt.requestedAt|date('H:m d-m-Y')}}</td>
+        <td>{{opt.currency}}</td>
+        <td>{{opt.urls}}</td>
+        <td>{{opt.Tags}}</td>
+        <td>{{opt.date}}</td>
+        <td>{{opt.estimatedRevenue}}</td>
+        <td>{{opt.adImpressions}}</td>
+        <td>{{opt.adEcpm}}</td>
+        <td>{{opt.clicks}}</td>
+        <td>{{opt.adCtr}}</td>
+    </tr>
+    {% endfor %}
   </tbody>
 </table>
 
@@ -70,7 +83,7 @@ function request()
             $("#output").html(res)
             json.data.forEach(function(data)
             {
-                let tdHtml = '<td scope="row">now(frontend ajax call)</td><td scope="row">'+$("#select option:selected").text()+'</td>';
+                let tdHtml = '<td scope="row">now</td><td scope="row">'+$("#select option:selected").text()+'</td>';
                 data.forEach(function(fe)
                 {
                     tdHtml += `<td scope="row">${fe}</td>`
