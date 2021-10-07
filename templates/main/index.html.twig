@@ -11,14 +11,38 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    <button class="btn btn-primary" onclick="request()">Send Request to OptAd360 TestApi</button> <label for="sel">Currency</label>
+    <button class="btn btn-primary" onclick="request()">Send & write to history Request to OptAd360 TestApi</button> <label for="sel">Currency</label>
 	<select name="sel" id="select" onchange="processChange()">
 		<option selected value="1">PLN</option>
 		<option value="2">EUR</option>
 		<option value="3">USD</option>
-		<option value="4">GBP</option>
 	</select>
-    <p id="output"> </p>
+    
+    
+
+
+<table class="table table-secondary table-hover">
+  <theadclass="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Oferta</th>
+      <th scope="col">Użytkownik</th>
+      <th class="d-none d-sm-table-cell" scope="col">Data</th>
+    </tr>
+  </thead>
+  <tbody id="hed">
+    {# {% for offer in auction.offers|filter(offer => offer.byUser != null) %} #}
+        <tr {#% if loop.index == 1 %}class="table-warning"{% endif %#}>
+            <th class="throw" scope="row">{#{ loop.index }#}</th>
+            <td>{#{offer.value/100}#} PLN</td>
+            <td>{#{offer.byUser.username}#}</td>
+            <td class="d-none d-sm-table-cell">{#{offer.createdAt|date('H:m d-m-Y')}#}</td>
+        </tr>
+    {#% endfor %#}
+  </tbody>
+</table>
+
+
 </div>
 {% endblock %}
 
@@ -38,7 +62,7 @@ function request()
 		})
 	.done(res => 
 	{ 
-		console.log(res);
+		console.log(JSON.parse(res));
         $("#output").html(res)
 		/*if(res.result == 1)
 		{
