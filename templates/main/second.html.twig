@@ -15,9 +15,8 @@
 
     <button class="btn btn-primary" onclick="request()">Send Request & write to history to IMGW API</button> <label for="sel">Station</label>
 	<select name="sel" id="select" onchange="processChange()">
-		<option selected value="1">PLN</option>
 		    {% for station in stations %}
-		        <option value="1">{{station}}</option>
+		        <option value="{{station[1]}}">{{station[0]}}</option>
             {% endfor %} 
 	</select>
     
@@ -87,13 +86,13 @@ function getStations()
 
 function request()
 {
-	let url = "{{path ('getOptAd360') }}";
+	let url = "{{path ('getImgw') }}";
 
 	$.ajax({
 		url: url,
 		method: "post", 
 		data: JSON.stringify(
-			{'currency':$("#select option:selected").text()})
+			{'stationid':$("#select").val()})
 		})
 	.done(res => 
 	{ 

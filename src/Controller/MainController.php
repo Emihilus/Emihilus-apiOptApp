@@ -38,7 +38,7 @@ class MainController extends AbstractController
         $stations = [];
         foreach ($json as $row) 
         {
-            array_push($stations, $row->stacja." (id: ".$row->id_stacji.")");
+            array_push($stations, [$row->stacja." (id: ".$row->id_stacji.")", $row->id_stacji]);
         }
 
         return $this->render('main/second.html.twig', [

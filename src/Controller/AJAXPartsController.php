@@ -61,6 +61,53 @@ class AJAXPartsController extends AbstractController
         ]);*/
     }
 
+    /**
+     * @Route("/getImgw", name="getImgw", methods={"POST"})
+     */
+    public function indexa(Request $request): Response
+    {
+        $json = json_decode($request->getContent());
+        $url = "https://danepubliczne.imgw.pl/api/data/synop/sa"
+        dump($url);
+        try
+        {
+            $data = file_get_contents($url);
+        }
+        catch(Exception $e)
+        {
+            return new Response('0');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $apiJson = json_decode($data);
+        foreach ($apiJson->data as $row) 
+        {
+            $opt = new OptAd;
+            $opt->setCurrency($json->currency);
+            $opt->setUrls($row[0]);
+            $opt->setTags($row[1]);
+            $opt->setDate($row[2]);
+            $opt->setEstimatedRevenue($row[3]);
+            $opt->setAdImpressions($row[4]);
+            $opt->setAdEcpm($row[5]);
+            $opt->setClicks($row[6]);
+            $opt->setAdCtr($row[7]);
+            
+            $em->persist($opt);
+        }
+
+
+        $em->flush();
+        
+
+
+        return new Response ($data);
+
+        /*return $this->render('main/index.html.twig', [
+            'controller_name' => 'MainController',
+        ]);*/
+    }
+
     /* CZARNE PAPIEROSY
     {# {% for offer in auction.offers|filter(offer => offer.byUser != null) %} #}
         {#<tr {#% if loop.index == 1 %}class="table-warning"{% endif %#}>
