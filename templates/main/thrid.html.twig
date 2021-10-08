@@ -80,21 +80,21 @@ function request()
             
             json.data.detections.forEach(function(detection) 
             {
-              let tdHtml = `<td scope="row">${json.id_stacji}</td><td scope="row">${json.stacja}</td><td scope="row">${json.data_pomiaru} ${json.godzina_pomiaru}</td><td scope="row">${json.temperatura}</td><td scope="row">${json.kierunek_wiatru}</td><td scope="row">${json.predkosc_wiatru}</td><td scope="row">${json.wilgotnosc_wzgledna}</td><td scope="row">${json.suma_opadu}</td><td scope="row">${json.cisnienie}</td>`;
+              let tdHtml = `<td scope="row">${detection.language}</td><td scope="row">${detection.isReliable}</td><td scope="row">${detection.confidence}</td>`;
               
               if(trc == '')
               {
                 trc = document.createElement('tr');
-                trc.innerHTML = '<td scope="row">now (frontend)</td><td scope="row">'+$("#input").val()+'</td>';
+                trc.innerHTML = '<td scope="row">now (frontend)</td><td scope="row">'+$("#input").val()+'</td>'+tdHtml;
                 document.getElementById('hed').prepend(trc);
               }
               else
               {
-              trc = document.createElement('tr');
-              trc.innerHTML = tdHtml;
-              document.getElementById('hed').prepend(trc);
+                trc = document.createElement('tr');
+                trc.innerHTML = '<td scope="row"></td><td scope="row"></td>'+tdHtml;
+                document.getElementById('hed').prepend(trc);
               }
-            }
+            });
 
             
             
