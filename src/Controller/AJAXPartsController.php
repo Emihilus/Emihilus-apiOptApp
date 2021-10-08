@@ -105,33 +105,18 @@ class AJAXPartsController extends AbstractController
      */
     public function indeaxa(Request $request): Response
     {
-        $json = json_decode($request->getContent());
-        $url = "https://danepubliczne.IMGW.pl/api/data/synop/id/".$json->stationid;
-        try
-        {
-            $data = file_get_contents($url);
-        }
-        catch(Exception $e)
-        {
-            return new Response('0');
-        }
-
-        $apiJson = json_decode($data);
-        $em = $this->getDoctrine()->getManager();
-        
-        $measurement = new SavedIMGWMeasurement;
-        $measurement->setStationId($apiJson->id_stacji);
-        $measurement->setStation($apiJson->stacja);
-        $measurement->setDate($apiJson->data_pomiaru." ".$apiJson->godzina_pomiaru);
-        $measurement->setTemp($apiJson->temperatura);
-        $measurement->setWindDir($apiJson->kierunek_wiatru);
-        $measurement->setWindSpeed($apiJson->predkosc_wiatru);
-        $measurement->setRelativeHumidity($apiJson->wilgotnosc_wzgledna);
-        $measurement->setDropSum($apiJson->suma_opadu);
-        $measurement->setPressure($apiJson->cisnienie);
-        
-        $em->persist($measurement);
-        $em->flush();
+        header('Content-Type: application/json'); // Specify the type of data
+       $ch = curl_init('https://APPURL.com/api/json.php'); // Initialise cURL
+       $post = json_encode($post); // Encode the data array into a JSON string
+       $authorization = "Authorization: Bearer f62dfb5319805fb50f9d0f7c42c54ed4"; // Prepare the authorisation token
+       curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $authorization )); // Inject the token into the header
+       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+       curl_setopt($ch, CURLOPT_POST, 1); // Specify the request method as POST
+       curl_setopt($ch, CURLOPT_POSTFIELDS, $post); // Set the posted fields
+       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); // This will follow any redirects
+       $result = curl_exec($ch); // Execute the cURL statement
+       curl_close($ch); // Close the cURL connection
+       return json_decode($result); // Return the received data
         
         return new JsonResponse ($data);
     }
