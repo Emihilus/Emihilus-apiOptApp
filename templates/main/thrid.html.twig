@@ -80,24 +80,22 @@ function request()
             
             json.data.detections.forEach(function(detection) 
             {
-              let tdHtml = `<td scope="row">${detection.language}</td><td scope="row">${detection.isReliable}</td><td scope="row">${detection.confidence}</td>`;
-              
-              if(trc == '')
-              {
-                trc = document.createElement('tr');
-                trc.innerHTML = '<td scope="row">now (frontend)</td><td scope="row">'+$("#input").val()+'</td>'+tdHtml;
-                document.getElementById('hed').prepend(trc);
-              }
-              else
-              {
-                trc = document.createElement('tr');
-                trc.innerHTML = '<td scope="row"></td><td scope="row"></td>'+tdHtml;
-                document.getElementById('hed').prepend(trc);
-              }
+                let tdHtml = `<td scope="row">${detection.language}</td><td scope="row">${detection.isReliable}</td><td scope="row">${detection.confidence}</td>`;
+                
+                if(trc == '')
+                {
+                  trc = '<tr>';//document.createElement('tr');
+                  trc += '<td scope="row">now (frontend)</td><td scope="row">'+$("#input").val()+'</td>'+tdHtml+'</tr>';
+                  {# $("#hed").prepend(trc+'</tr>'); #}
+                }
+                else
+                {
+                  trc += '<tr>';
+                  trc += '<td scope="row"></td><td scope="row"></td>'+tdHtml+'</tr>';
+                }
             });
 
-            
-            
+            $("#hed").prepend(trc+'</tr>');
         }
         
 
