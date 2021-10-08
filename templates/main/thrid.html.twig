@@ -11,12 +11,12 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>DetectLanguage API</h1><hr> <span>Table below holds eariler saved results from API. Click Send button to make new request and store it in this history</span><br>
-    <button class="btn btn-primary" onclick="request()">Send Recognition Request & write to database</button> <br> <br>
-    <label for='inp'>Type text to language shold be recognized</label><br>
-	<textarea name='inp' id="input" rows="3"></textarea>
+    <h1>DetectLanguage API</h1><hr> <span>Table below holds previoulsy saved results from API. Click Send button to make new request and store it in this history.</span> <br>
+    <label for='inp'>Type text for language recognition</label><br>
+	<textarea cols="50" name='inp' id="input" rows="3"></textarea><br>
+    <button class="btn btn-primary my-auto" onclick="request()">Send Recognition Request & write to database</button>
 
-<table class="table table-secondary table-hover">
+<table class="mt-3 table table-secondary table-hover">
   <theadclass="thead-dark">
     <tr>
       <th scope="col">Requested At</th>
