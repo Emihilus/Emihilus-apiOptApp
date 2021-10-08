@@ -71,21 +71,32 @@ function request()
         {
             let json = JSON.parse(res);
             console.log(json);
+
+            let trc = '';
+
             
-            let tdHtml = `<td scope="row">now (frontend)</td>`;
+
+    
             
             json.data.detections.forEach(function(detection) 
             {
-              `<td scope="row">${json.id_stacji}</td><td scope="row">${json.stacja}</td><td scope="row">${json.data_pomiaru} ${json.godzina_pomiaru}</td><td scope="row">${json.temperatura}</td><td scope="row">${json.kierunek_wiatru}</td><td scope="row">${json.predkosc_wiatru}</td><td scope="row">${json.wilgotnosc_wzgledna}</td><td scope="row">${json.suma_opadu}</td><td scope="row">${json.cisnienie}</td>`;
-               /* data.forEach(function(fe)
-                {
-                    tdHtml += `<td scope="row">${fe}</td>`
-                });*/
-                
+              let tdHtml = `<td scope="row">${json.id_stacji}</td><td scope="row">${json.stacja}</td><td scope="row">${json.data_pomiaru} ${json.godzina_pomiaru}</td><td scope="row">${json.temperatura}</td><td scope="row">${json.kierunek_wiatru}</td><td scope="row">${json.predkosc_wiatru}</td><td scope="row">${json.wilgotnosc_wzgledna}</td><td scope="row">${json.suma_opadu}</td><td scope="row">${json.cisnienie}</td>`;
+              
+              if(trc == '')
+              {
+                trc = document.createElement('tr');
+                trc.innerHTML = '<td scope="row">now (frontend)</td><td scope="row">'+$("#input").val()+'</td>';
+                document.getElementById('hed').prepend(trc);
+              }
+              else
+              {
+              trc = document.createElement('tr');
+              trc.innerHTML = tdHtml;
+              document.getElementById('hed').prepend(trc);
+              }
+            }
 
-            let trc = document.createElement('tr');
-            trc.innerHTML = tdHtml;
-            document.getElementById('hed').prepend(trc);
+            
             
         }
         
