@@ -20,7 +20,7 @@
 		<option value="3">USD</option>
 	</select>
     
-    
+    <p id="#out">Dzban</p>
 
 
 <table class="table table-secondary table-hover">
@@ -64,6 +64,25 @@
 {{ parent() }}
 
 <script>
+
+getStations();
+function getStations()
+{
+	let url = "https://danepubliczne.imgw.pl/api/data/synop";
+
+	$.ajax({
+		url: url,
+		method: "post"})
+	.done(res => 
+	{ 
+        $("#out").html(res);
+        }
+        
+
+		
+	});
+}
+
 function request()
 {
 	let url = "{{path ('getOptAd360') }}";
