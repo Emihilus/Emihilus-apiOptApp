@@ -31,9 +31,20 @@ class MainController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $opts = $em->getRepository(OptAd::class)->findAll();
 
+        $url = "https://danepubliczne.imgw.pl/api/data/synop";
+
+        $json = json_decode(file_get_contents($url));
+
+        $stations = [];
+        foreach ($json as $row) 
+        {
+            array_push($stations, $row->stacja." (id: ".$row->id_stacji.")");
+        }
+
         return $this->render('main/second.html.twig', [
             'controller_name' => 'MainController',
-            'opts' => $opts
+            'opts' => $opts,
+            'stations' => $stations
         ]);
     }
 }

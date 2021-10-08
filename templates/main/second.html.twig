@@ -16,8 +16,9 @@
     <button class="btn btn-primary" onclick="request()">Send Request & write to history to IMGW API</button> <label for="sel">Station</label>
 	<select name="sel" id="select" onchange="processChange()">
 		<option selected value="1">PLN</option>
-		<option value="2">EUR</option>
-		<option value="3">USD</option>
+		    {% for station in stations %}
+		        <option value="1">{{station}}</option>
+            {% endfor %} 
 	</select>
     
     <p id="#out">Dzban</p>
@@ -72,11 +73,12 @@ function getStations()
 
 	$.ajax({
 		url: url,
-		method: "post"})
+		method: "post",
+        dataType:'json'})
 	.done(res => 
 	{ 
         $("#out").html(res);
-        }
+        
         
 
 		
