@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\ApiKey;
 use App\Entity\OptAd;
 use App\Entity\SavedIMGWMeasurement;
+use App\Entity\SavedLanguageRecognitionRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -115,6 +116,26 @@ class AJAXPartsController extends AbstractController
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); // This will follow any redirects
         $result = curl_exec($ch); // Execute the cURL statement
         curl_close($ch); // Close the cURL connection
+
+
+        $apiJson = json_decode($result);
+        $em = $this->getDoctrine()->getManager();
+        
+        $savedRequest = new SavedLanguageRecognitionRequest;
+        $savedRequest->setStationId($apiJson->id_stacji);
+        $savedRequest->setStation($apiJson->stacja);
+        $savedRequest->setDate($apiJson->data_pomiaru." ".$apiJson->godzina_pomiaru);
+        $savedRequest->setTemp($apiJson->temperatura);
+        $savedRequest->setWindDir($apiJson->kierunek_wiatru);
+        $savedRequest->setWindSpeed($apiJson->predkosc_wiatru);
+        $savedRequest->setRelativeHumidity($apiJson->wilgotnosc_wzgledna);
+        $savedRequest->setDropSum($apiJson->suma_opadu);
+        $savedRequest->setPressure($apiJson->cisnienie);
+        
+        $em->persist($savedRequest);
+        $em->flush();
+
+
         
         return new JsonResponse($result);
     }
