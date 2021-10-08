@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\OptAd;
 use App\Entity\SavedIMGWMeasurement;
+use App\Entity\SavedLanguageRecognitionRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -55,7 +56,7 @@ class MainController extends AbstractController
     public function thr(): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $opts = $em->getRepository(OptAd::class)->findAll();
+        $opts = $em->getRepository(SavedLanguageRecognitionRequest::class)->findAllWithDetections();
 
         return $this->render('main/thrid.html.twig', [
             'controller_name' => 'MainController',

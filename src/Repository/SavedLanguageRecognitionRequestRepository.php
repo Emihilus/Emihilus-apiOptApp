@@ -19,32 +19,15 @@ class SavedLanguageRecognitionRequestRepository extends ServiceEntityRepository
         parent::__construct($registry, SavedLanguageRecognitionRequest::class);
     }
 
-    // /**
-    //  * @return SavedLanguageRecognitionRequest[] Returns an array of SavedLanguageRecognitionRequest objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findAllWithDetections()
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+       return $this->createQueryBuilder('s')
+            ->leftJoin('s.detections', 'i')
+            ->addSelect('i.filename')
+            ->where('i.orderIndicator = 0')
+            ->orWhere('i.orderIndicator IS NULL')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?SavedLanguageRecognitionRequest
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

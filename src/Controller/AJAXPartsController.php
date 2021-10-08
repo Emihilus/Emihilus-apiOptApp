@@ -127,11 +127,12 @@ class AJAXPartsController extends AbstractController
         
         foreach ($apiJson->data->detections as $detection) 
         {
-            $detection = new SavedLanguageRecognitionDetection;
-            $detection->setRecognizedLang($detection->language);
-            $detection->setIsReliable($detection->isReliable);
-            $detection->setConfidenceScore($detection->confidence);
-            $savedRequest->addRecognition($detection);
+            $detectionE = new SavedLanguageRecognitionDetection;
+            $detectionE->setRecognizedLang($detection->language);
+            $detectionE->setIsReliable($detection->isReliable);
+            $detectionE->setConfidenceScore($detection->confidence);
+            $em->persist($detectionE);
+            $savedRequest->addRecognition($detectionE);
         }
         
         $em->persist($savedRequest);
