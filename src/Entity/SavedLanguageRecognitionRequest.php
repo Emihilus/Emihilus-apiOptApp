@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=SavedLanguageRecognitionRequestRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class SavedLanguageRecognitionRequest
 {
@@ -96,5 +97,13 @@ class SavedLanguageRecognitionRequest
         }
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function autoSetRequestedAt()
+    {
+        $this->requested_at = new \DateTime();
     }
 }
