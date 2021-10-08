@@ -108,7 +108,7 @@ class AJAXPartsController extends AbstractController
     {
         header('Content-Type: application/json');
        $ch = curl_init('https://ws.detectlanguage.com/0.2/detect');
-       $post = json_encode(['q'=>'Mandatory']);
+       $post = json_encode($request-);//['q'=>'Mandatory']);
        $authorization = "Authorization: Bearer ".ApiKey::KEY; // Delegate key to separate class file due to avoid of exposing it on GitHub
        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $authorization )); // Inject the token into the header
        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

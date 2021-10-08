@@ -13,14 +13,10 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    <button class="btn btn-primary" onclick="request()">Send Request & write to history to IMGW API</button> <label for="sel">Station</label>
-	<select name="sel" id="select">
-		    {#% for station in stations %}
-		        <option value="{{station[1]}}">{{station[0]}}</option>
-            {% endfor %#} 
-	</select>
+    <button class="btn btn-primary" onclick="request()">Send Request & write to history to IMGW API</button> 
+	<textarea id="input" rows="3"></textarea>
 
-<table class="table table-secondary table-hover">
+{#<table class="table table-secondary table-hover">
   <theadclass="thead-dark">
     <tr>
       <th scope="col">Requested At</th>
@@ -36,7 +32,7 @@
     </tr>
   </thead>
   <tbody id="hed">
-     {#% for m in measurements %} 
+     % for m in measurements %} 
      <tr>
         <td>{{m.requestedAt|date('H:m d-m-Y')}}</td>
         <td>{{m.stationId}}</td>
@@ -49,9 +45,9 @@
         <td>{{m.dropSum}}</td>
         <td>{{m.pressure}}</td>
     </tr>
-    {% endfor %#}
+    {% endfor %
   </tbody>
-</table>
+</table>#}
 
 
 </div>
@@ -70,7 +66,7 @@ function request()
 		url: url,
 		method: "post", 
 		data: JSON.stringify(
-			{'stationid':$("#select").val()})
+			{'content':$("#input").val()})
 		})
 	.done(res => 
 	{ 
