@@ -78,6 +78,7 @@ function request()
             alert("Request failed");
         else
         {
+            console.log(res);
             let json = JSON.parse(res);
             console.log(json);
             json.data.forEach(function(data)
