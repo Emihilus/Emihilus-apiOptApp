@@ -11,7 +11,7 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>IMGW API</h1>
+    <h1>IMGW API</h1><hr>
     <button class="btn btn-primary" onclick="request()">Send Request & write to database</button> <label for="sel">Station</label>
 	<select name="sel" id="select">
 		    {% for station in stations %}
@@ -19,7 +19,7 @@
             {% endfor %} 
 	</select>
 
-<table class="table table-secondary table-hover">
+<table class="mt-3 table table-secondary table-hover">
   <theadclass="thead-dark">
     <tr>
       <th scope="col">Requested At</th>
@@ -35,7 +35,7 @@
     </tr>
   </thead>
   <tbody id="hed">
-     {% for m in measurements %} 
+     {% for m in measurements|reverse %} 
      <tr>
         <td>{{m.requestedAt|date('H:m d-m-Y')}}</td>
         <td>{{m.stationId}}</td>
