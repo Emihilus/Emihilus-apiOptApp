@@ -11,7 +11,7 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>IMGW API</h1><hr>
+    <h1>IMGW API</h1> <a href="https://danepubliczne.imgw.pl/">https://danepubliczne.imgw.pl/</a> <hr>
     <span>Table below holds previously saved results from API. Click Send button to make new request and store it in this history</span><br>
     <button class="btn btn-primary" onclick="request()">Send Request & write to database</button> <label for="sel">Station</label>
 	<select name="sel" id="select">
@@ -82,10 +82,7 @@ function request()
             console.log(json);
             
             let tdHtml = `<td scope="row">now (frontend)</td><td scope="row">${json.id_stacji}</td><td scope="row">${json.stacja}</td><td scope="row">${json.data_pomiaru} ${json.godzina_pomiaru}</td><td scope="row">${json.temperatura}</td><td scope="row">${json.kierunek_wiatru}</td><td scope="row">${json.predkosc_wiatru}</td><td scope="row">${json.wilgotnosc_wzgledna}</td><td scope="row">${json.suma_opadu}</td><td scope="row">${json.cisnienie}</td>`;
-               /* data.forEach(function(fe)
-                {
-                    tdHtml += `<td scope="row">${fe}</td>`
-                });*/
+               
 
             let trc = document.createElement('tr');
             trc.innerHTML = tdHtml;

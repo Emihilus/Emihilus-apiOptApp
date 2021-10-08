@@ -84,16 +84,18 @@ class AJAXPartsController extends AbstractController
         $apiJson = json_decode($data);
         $em = $this->getDoctrine()->getManager();
         
+        dump($apiJson);
+
         $measurement = new SavedIMGWMeasurement;
-        $measurement->setStationId($apiJson->id_stacji);
-        $measurement->setStation($apiJson->stacja);
-        $measurement->setDate($apiJson->data_pomiaru." ".$apiJson->godzina_pomiaru);
-        $measurement->setTemp($apiJson->temperatura);
-        $measurement->setWindDir($apiJson->kierunek_wiatru);
-        $measurement->setWindSpeed($apiJson->predkosc_wiatru);
-        $measurement->setRelativeHumidity($apiJson->wilgotnosc_wzgledna);
-        $measurement->setDropSum($apiJson->suma_opadu);
-        $measurement->setPressure($apiJson->cisnienie);
+        $measurement->setStationId($apiJson->id_stacji)
+            ->setStation($apiJson->stacja)
+            ->setDate($apiJson->data_pomiaru." ".$apiJson->godzina_pomiaru)
+            ->setTemp($apiJson->temperatura)
+            ->setWindDir($apiJson->kierunek_wiatru)
+            ->setWindSpeed($apiJson->predkosc_wiatru)
+            ->setRelativeHumidity($apiJson->wilgotnosc_wzgledna)
+            ->setDropSum($apiJson->suma_opadu)
+            ->setPressure(isset($apiJson->cisnienie) ? $apiJson->cisnienie : 'unknown');
         
         $em->persist($measurement);
         $em->flush();
