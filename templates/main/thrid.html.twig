@@ -62,7 +62,7 @@
 function request()
 {
 	let url = "{{path ('lng') }}";
-
+  if ($("#input").val()== "") return;
 	$.ajax({
 		url: url,
 		method: "post", 
