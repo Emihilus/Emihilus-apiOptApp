@@ -90,7 +90,7 @@ class AJAXPartsController extends AbstractController
         $measurement->setWindDir($apiJson->kierunek_wiatru);
         $measurement->setWindSpeed($apiJson->predkosc_wiatru);
         $measurement->setRelativeHumidity($apiJson->wilgotnosc_wzgledna);
-        $measurement->setDropSum($apiJson->suma_opadow);
+        $measurement->setDropSum($apiJson->suma_opadu);
         $measurement->setPressure($apiJson->cisnienie);
         
         $em->persist($measurement);
