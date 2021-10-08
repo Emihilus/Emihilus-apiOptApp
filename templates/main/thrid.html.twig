@@ -28,20 +28,20 @@
   </thead>
   <tbody id="hed">
      {% for r in recs %} 
-     <tr class="{% if loop.index%2 == 0 %}">
+     <tr class="{% if loop.index%2 == 0 %}{% set bg = 'table-warning' %}{% else %}{% set bg = 'table-success' %}{% endif %}{{bg}}">
         <td>{{r.requestedAt|date('H:m d-m-Y')}}</td>
         <td>{{r.souceText}}</td>
         <td>{{r.recognitions[0].recognizedLang}}</td>
-        <td>{{r.recognitions[0].isReliable}}</td>
+        <td>{% if r.recognitions[0].isReliable == 1 %}yes{% else %}no{% endif %}</td>
         <td>{{r.recognitions[0].confidenceScore}}</td>
     </tr>
       {% for ro in r.recognitions %}
         {% if loop.index != 1 %}
-          <tr>
+          <tr class="{{bg}}">
             <td></td>
             <td></td>
             <td>{{ro.recognizedLang}}</td>
-            <td>{{ro.isReliable}}</td>
+            <td>{% if ro.isReliable == 1 %}yes{% else %}no{% endif %}</td>
             <td>{{ro.confidenceScore}}</td>
         </tr>
         {% endif %}
