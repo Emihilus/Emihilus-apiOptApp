@@ -19,13 +19,11 @@ class SavedLanguageRecognitionRequestRepository extends ServiceEntityRepository
         parent::__construct($registry, SavedLanguageRecognitionRequest::class);
     }
 
-    public function findAllWithDetections()
+    public function findAllWithRecognitions()
     {
        return $this->createQueryBuilder('s')
-            ->leftJoin('s.detections', 'i')
-            ->addSelect('i.filename')
-            ->where('i.orderIndicator = 0')
-            ->orWhere('i.orderIndicator IS NULL')
+            ->leftJoin('s.recognitions', 'r')
+            ->addSelect('s.recognition')
             ->getQuery()
             ->getResult()
         ;

@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\ApiKey;
+use App\ApiKeyHidden;
 use App\Entity\OptAd;
 use App\Entity\SavedIMGWMeasurement;
 use App\Entity\SavedLanguageRecognitionDetection;
@@ -109,7 +109,7 @@ class AJAXPartsController extends AbstractController
     {
         header('Content-Type: application/json');
         $ch = curl_init('https://ws.detectlanguage.com/0.2/detect');
-        $authorization = "Authorization: Bearer ".ApiKey::KEY; // Delegate key to separate class file due to avoid of exposing it on GitHub
+        $authorization = "Authorization: Bearer ".ApiKeyHidden::KEY; // Delegate key to separate class file due to avoid of exposing it on GitHub
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $authorization )); // Inject the token into the header
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, 1); // Specify the request method as POST

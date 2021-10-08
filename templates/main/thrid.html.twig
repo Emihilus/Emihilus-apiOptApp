@@ -27,20 +27,26 @@
     </tr>
   </thead>
   <tbody id="hed">
-     {#% for m in measurements %} 
+     {% for r in recs %} 
      <tr>
-        <td>{{m.requestedAt|date('H:m d-m-Y')}}</td>
-        <td>{{m.stationId}}</td>
-        <td>{{m.station}}</td>
-        <td>{{m.date}}</td>
-        <td>{{m.temp}}</td>
-        <td>{{m.windDir}}</td>
-        <td>{{m.windSpeed}}</td>
-        <td>{{m.relativeHumidity}}</td>
-        <td>{{m.dropSum}}</td>
-        <td>{{m.pressure}}</td>
+        <td>{{r.requestedAt|date('H:m d-m-Y')}}</td>
+        <td>{{r.sourceText}}</td>
+        <td>{{r.recognitions[0].recognizedLang}}</td>
+        <td>{{r.recognitions[0].isReliable}}</td>
+        <td>{{r.recognitions[0].confidenceScore}}</td>
     </tr>
-    {% endfor %#}
+      {% for ro in r.recognitions %}
+        {% if loop.index != 1 %}
+          <tr>
+            <td></td>
+            <td></td>
+            <td>{{ro.recognizedLang}}</td>
+            <td>{{ro.isReliable}}</td>
+            <td>{{ro.confidenceScore}}</td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
   </tbody>
 </table>
 

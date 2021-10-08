@@ -56,11 +56,11 @@ class MainController extends AbstractController
     public function thr(): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $opts = $em->getRepository(SavedLanguageRecognitionRequest::class)->findAllWithDetections();
+        $recs = $em->getRepository(SavedLanguageRecognitionRequest::class)->findAllWithRecognitions();
 
         return $this->render('main/thrid.html.twig', [
             'controller_name' => 'MainController',
-            'opts' => $opts
+            'recs' => $recs
         ]);
     }
 }
