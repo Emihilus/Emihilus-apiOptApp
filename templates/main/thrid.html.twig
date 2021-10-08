@@ -13,26 +13,21 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    <button class="btn btn-primary" onclick="request()">Send Request & write to history to IMGW API</button> 
+    <button class="btn btn-primary" onclick="request()">Send Recognition Request & write to history database</button> <br> <br>
 	<textarea id="input" rows="3"></textarea>
 
-{#<table class="table table-secondary table-hover">
+<table class="table table-secondary table-hover">
   <theadclass="thead-dark">
     <tr>
       <th scope="col">Requested At</th>
-      <th scope="col">Station ID</th>
-      <th scope="col">Station</th>
-      <th scope="col">Date</th>
-      <th scope="col">Temp</th>
-      <th scope="col">Wind dir.</th>
-      <th scope="col">Wind speed</th>
-      <th scope="col">Relative Wilg</th>
-      <th scope="col">Drop sum</th>
-      <th scope="col">Pressure</th>
+      <th scope="col">Source Text</th>
+      <th scope="col">Recognized language</th>
+      <th scope="col">isReliable</th>
+      <th scope="col">Confidence score</th>
     </tr>
   </thead>
   <tbody id="hed">
-     % for m in measurements %} 
+     {#% for m in measurements %} 
      <tr>
         <td>{{m.requestedAt|date('H:m d-m-Y')}}</td>
         <td>{{m.stationId}}</td>
@@ -45,9 +40,9 @@
         <td>{{m.dropSum}}</td>
         <td>{{m.pressure}}</td>
     </tr>
-    {% endfor %
+    {% endfor %#}
   </tbody>
-</table>#}
+</table>
 
 
 </div>
@@ -66,7 +61,7 @@ function request()
 		url: url,
 		method: "post", 
 		data: JSON.stringify(
-			{'content':$("#input").val()})
+			{'q':$("#input").val()})
 		})
 	.done(res => 
 	{ 
