@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\OptAd;
-use App\Repository\SavedIMGWMeasurementRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\SavedIMGWMeasurement;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MainController extends AbstractController
 {
@@ -30,9 +30,9 @@ class MainController extends AbstractController
     public function sec(): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $measurements = $em->getRepository(SavedIMGWMeasurementRepository::class)->findAll();
+        $measurements = $em->getRepository(SavedIMGWMeasurement::class)->findAll();
 
-        $url = "https://danepubliczne.imgw.pl/api/data/synop";
+        $url = "https://danepubliczne.IMGW.pl/api/data/synop";
 
         $json = json_decode(file_get_contents($url));
 

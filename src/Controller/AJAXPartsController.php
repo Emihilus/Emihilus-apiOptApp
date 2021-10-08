@@ -64,12 +64,12 @@ class AJAXPartsController extends AbstractController
     }
 
     /**
-     * @Route("/getImgw", name="getImgw", methods={"POST"})
+     * @Route("/getIMGW", name="getIMGW", methods={"POST"})
      */
     public function indexa(Request $request): Response
     {
         $json = json_decode($request->getContent());
-        $url = "https://danepubliczne.imgw.pl/api/data/synop/id/".$json->stationid;
+        $url = "https://danepubliczne.IMGW.pl/api/data/synop/id/".$json->stationid;
         try
         {
             $data = file_get_contents($url);

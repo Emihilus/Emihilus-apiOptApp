@@ -42,15 +42,15 @@
      {% for m in measurements %} 
      <tr>
         <td>{{m.requestedAt|date('H:m d-m-Y')}}</td>
-        <td>{{o}}</td>
-        <td>{{m.urls}}</td>
-        <td>{{m.Tags}}</td>
+        <td>{{m.stationId}}</td>
+        <td>{{m.station}}</td>
         <td>{{m.date}}</td>
-        <td>{{m.estimatedRevenue}}</td>
-        <td>{{m.adImpressions}}</td>
-        <td>{{m.adEcpm}}</td>
-        <td>{{m.clicks}}</td>
-        <td>{{m.adCtr}}</td>
+        <td>{{m.temp}}</td>
+        <td>{{m.windDir}}</td>
+        <td>{{m.windSpeed}}</td>
+        <td>{{m.relativeHumidity}}</td>
+        <td>{{m.dropSum}}</td>
+        <td>{{m.pressure}}</td>
     </tr>
     {% endfor %}
   </tbody>
@@ -67,7 +67,7 @@
 
 function request()
 {
-	let url = "{{path ('getImgw') }}";
+	let url = "{{path ('getIMGW') }}";
 
 	$.ajax({
 		url: url,
