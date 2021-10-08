@@ -48,4 +48,18 @@ class MainController extends AbstractController
             'stations' => $stations
         ]);
     }
+
+    /**
+     * @Route("/thr", name="thr")
+     */
+    public function thr(): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $opts = $em->getRepository(OptAd::class)->findAll();
+
+        return $this->render('main/thrid.html.twig', [
+            'controller_name' => 'MainController',
+            'opts' => $opts
+        ]);
+    }
 }

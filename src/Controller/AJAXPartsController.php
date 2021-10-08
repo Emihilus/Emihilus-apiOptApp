@@ -99,4 +99,41 @@ class AJAXPartsController extends AbstractController
         return new JsonResponse ($data);
     }
 
+
+    /**
+     * @Route("/lng", name="lng", methods={"POST"})
+     */
+    public function indeaxa(Request $request): Response
+    {
+        $json = json_decode($request->getContent());
+        $url = "https://danepubliczne.IMGW.pl/api/data/synop/id/".$json->stationid;
+        try
+        {
+            $data = file_get_contents($url);
+        }
+        catch(Exception $e)
+        {
+            return new Response('0');
+        }
+
+        $apiJson = json_decode($data);
+        $em = $this->getDoctrine()->getManager();
+        
+        $measurement = new SavedIMGWMeasurement;
+        $measurement->setStationId($apiJson->id_stacji);
+        $measurement->setStation($apiJson->stacja);
+        $measurement->setDate($apiJson->data_pomiaru." ".$apiJson->godzina_pomiaru);
+        $measurement->setTemp($apiJson->temperatura);
+        $measurement->setWindDir($apiJson->kierunek_wiatru);
+        $measurement->setWindSpeed($apiJson->predkosc_wiatru);
+        $measurement->setRelativeHumidity($apiJson->wilgotnosc_wzgledna);
+        $measurement->setDropSum($apiJson->suma_opadu);
+        $measurement->setPressure($apiJson->cisnienie);
+        
+        $em->persist($measurement);
+        $em->flush();
+        
+        return new JsonResponse ($data);
+    }
+
 }
