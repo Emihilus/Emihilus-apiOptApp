@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Exception;
+use App\ApiKey;
 use App\Entity\OptAd;
 use App\Entity\SavedIMGWMeasurement;
 use Symfony\Component\HttpFoundation\Request;
@@ -105,10 +106,10 @@ class AJAXPartsController extends AbstractController
      */
     public function indeaxa(Request $request): Response
     {
-        header('Content-Type: application/json'); // Specify the type of data
-       $ch = curl_init('https://ws.detectlanguage.com/0.2/detect'); // Initialise cURL
-       $post = json_encode(['q'=>'Mandatory']); // Encode the data array into a JSON string
-       $authorization = "Authorization: Bearer f62dfb5319805fb50f9d0f7c42c54ed4"; // Prepare the authorisation token
+        header('Content-Type: application/json');
+       $ch = curl_init('https://ws.detectlanguage.com/0.2/detect');
+       $post = json_encode(['q'=>'Mandatory']);
+       $authorization = "Authorization: Bearer ".ApiKey::KEY; // Delegate key to separate class file due to avoid of exposing it on GitHub
        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $authorization )); // Inject the token into the header
        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
        curl_setopt($ch, CURLOPT_POST, 1); // Specify the request method as POST
