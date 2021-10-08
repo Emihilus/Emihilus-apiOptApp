@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use Exception;
 use App\ApiKey;
 use App\Entity\OptAd;
 use App\Entity\SavedIMGWMeasurement;
@@ -29,7 +28,7 @@ class AJAXPartsController extends AbstractController
         {
             $data = file_get_contents($url);
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
             return new Response('0');
         }
@@ -75,7 +74,7 @@ class AJAXPartsController extends AbstractController
         {
             $data = file_get_contents($url);
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
             return new Response('0');
         }
@@ -107,17 +106,15 @@ class AJAXPartsController extends AbstractController
     public function indeaxa(Request $request): Response
     {
         header('Content-Type: application/json');
-       $ch = curl_init('https://ws.detectlanguage.com/0.2/detect');
-       //$post = json_encode();//['q'=>'Mandatory']);
-       $authorization = "Authorization: Bearer ".ApiKey::KEY; // Delegate key to separate class file due to avoid of exposing it on GitHub
-       curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $authorization )); // Inject the token into the header
-       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-       curl_setopt($ch, CURLOPT_POST, 1); // Specify the request method as POST
-       curl_setopt($ch, CURLOPT_POSTFIELDS, $request->getContent()); // Set the posted fields
-       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); // This will follow any redirects
-       $result = curl_exec($ch); // Execute the cURL statement
-       curl_close($ch); // Close the cURL connection
-       dump( json_decode($result)); // Return the received data
+        $ch = curl_init('https://ws.detectlanguage.com/0.2/detect');
+        $authorization = "Authorization: Bearer ".ApiKey::KEY; // Delegate key to separate class file due to avoid of exposing it on GitHub
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $authorization )); // Inject the token into the header
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, 1); // Specify the request method as POST
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $request->getContent()); // Set the posted fields
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); // This will follow any redirects
+        $result = curl_exec($ch); // Execute the cURL statement
+        curl_close($ch); // Close the cURL connection
         
         return new JsonResponse($result);
     }
