@@ -15,9 +15,9 @@
 
     <button class="btn btn-primary" onclick="request()">Send Request & write to history to IMGW API</button> <label for="sel">Station</label>
 	<select name="sel" id="select">
-		    {% for station in stations %}
+		    {#% for station in stations %}
 		        <option value="{{station[1]}}">{{station[0]}}</option>
-            {% endfor %} 
+            {% endfor %#} 
 	</select>
 
 <table class="table table-secondary table-hover">
@@ -36,7 +36,7 @@
     </tr>
   </thead>
   <tbody id="hed">
-     {% for m in measurements %} 
+     {#% for m in measurements %} 
      <tr>
         <td>{{m.requestedAt|date('H:m d-m-Y')}}</td>
         <td>{{m.stationId}}</td>
@@ -49,7 +49,7 @@
         <td>{{m.dropSum}}</td>
         <td>{{m.pressure}}</td>
     </tr>
-    {% endfor %}
+    {% endfor %#}
   </tbody>
 </table>
 

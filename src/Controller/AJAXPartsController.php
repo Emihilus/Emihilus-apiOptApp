@@ -106,8 +106,8 @@ class AJAXPartsController extends AbstractController
     public function indeaxa(Request $request): Response
     {
         header('Content-Type: application/json'); // Specify the type of data
-       $ch = curl_init('https://APPURL.com/api/json.php'); // Initialise cURL
-       $post = json_encode($post); // Encode the data array into a JSON string
+       $ch = curl_init('https://ws.detectlanguage.com/0.2/detect'); // Initialise cURL
+       $post = json_encode(['q'=>'Mandatory']); // Encode the data array into a JSON string
        $authorization = "Authorization: Bearer f62dfb5319805fb50f9d0f7c42c54ed4"; // Prepare the authorisation token
        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $authorization )); // Inject the token into the header
        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -116,9 +116,9 @@ class AJAXPartsController extends AbstractController
        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); // This will follow any redirects
        $result = curl_exec($ch); // Execute the cURL statement
        curl_close($ch); // Close the cURL connection
-       return json_decode($result); // Return the received data
+       dump( json_decode($result)); // Return the received data
         
-        return new JsonResponse ($data);
+        return new Response('sadsa');
     }
 
 }
