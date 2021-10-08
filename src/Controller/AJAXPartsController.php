@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\OptAd;
 use Exception;
+use App\Entity\OptAd;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
     /**
@@ -100,20 +101,7 @@ class AJAXPartsController extends AbstractController
         
 
 
-        return new Response ($data);
-
-        /*return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
-        ]);*/
+        return new JsonResponse ($data);
     }
 
-    /* CZARNE PAPIEROSY
-    {# {% for offer in auction.offers|filter(offer => offer.byUser != null) %} #}
-        {#<tr {#% if loop.index == 1 %}class="table-warning"{% endif %#}>
-            <th class="throw" scope="row">{#{ loop.index }#}</th>
-            <td>{#{offer.value/100}#} PLN</td>
-            <td>{#{offer.byUser.username}#}</td>
-            <td>{#{offer.createdAt|date('H:m d-m-Y')}#}</td>
-        </tr>#}
-    {#% endfor %#}*/
 }

@@ -14,7 +14,7 @@
     <h1>Hello {{ controller_name }}! ✅</h1>
 
     <button class="btn btn-primary" onclick="request()">Send Request & write to history to IMGW API</button> <label for="sel">Station</label>
-	<select name="sel" id="select" onchange="processChange()">
+	<select name="sel" id="select">
 		    {% for station in stations %}
 		        <option value="{{station[1]}}">{{station[0]}}</option>
             {% endfor %} 
@@ -31,8 +31,8 @@
       <th scope="col">Station</th>
       <th scope="col">Date</th>
       <th scope="col">Temp</th>
-      <th scope="col">Wind speed</th>
       <th scope="col">Wind dir.</th>
+      <th scope="col">Wind speed</th>
       <th scope="col">Relative Wilg</th>
       <th scope="col">Drop sum</th>
       <th scope="col">Pressure</th>
@@ -84,7 +84,7 @@ function request()
             let json = JSON.parse(res);
             console.log(json);
             
-            let tdHtml = `<td scope="row">now (frontend)</td><td scope="row">${json.id_stacji}</td><td scope="row">${json.stacja}</td><td scope="row">${json.data_pomiaru} ${json.godzina_pomiaru}</td><td scope="row">${json.temperatura}</td><td scope="row"></td><td scope="row"></td><td scope="row"></td><td scope="row"></td><td scope="row"></td><td scope="row"></td>`;
+            let tdHtml = `<td scope="row">now (frontend)</td><td scope="row">${json.id_stacji}</td><td scope="row">${json.stacja}</td><td scope="row">${json.data_pomiaru} ${json.godzina_pomiaru}</td><td scope="row">${json.temperatura}</td><td scope="row">${json.kierunek_wiatru}</td><td scope="row">${json.predkosc_wiatru}</td><td scope="row">${json.wilgotnosc_wzgledna}</td><td scope="row">${json.suma_opadu}</td><td scope="row">${json.cisnienie}</td>`;
                /* data.forEach(function(fe)
                 {
                     tdHtml += `<td scope="row">${fe}</td>`
