@@ -39,7 +39,7 @@
     </tr>
   </thead>
   <tbody id="hed">
-     {% for opt in opts %} 
+     {% for opt in opts|reverse %} 
      <tr>
         <td>{{opt.requestedAt|date('H:m d-m-Y')}}</td>
         <td>{{opt.currency}}</td>

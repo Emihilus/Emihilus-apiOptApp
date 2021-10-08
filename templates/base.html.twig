@@ -28,7 +28,7 @@ background: radial-gradient(circle, rgba(55,55,55,1) 0%, rgba(0,0,0,1) 100%);">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 
-					<div class="collapse navbar-collapse w-100" id="mainmenu">
+					<div class="collapse navbar-collapse" id="mainmenu">
 						<ul class="navbar-nav">
 
                             <li class="nav-item d-none d-sm-block">
@@ -51,8 +51,33 @@ background: radial-gradient(circle, rgba(55,55,55,1) 0%, rgba(0,0,0,1) 100%);">
 							</ul>
 							</div>
 
-							<div class="collapse navbar-collapse me-1">
-						
+							<div class="collapse navbar-collapse me-1 d-sm-none">
+						        <ul class="navbar-nav d-sm-none">
+
+
+							
+								 <li class="nav-item my-auto dropdown">
+
+										<a class="nav-link dropdown-toggle active" data-toggle="dropdown">Menu
+										</a>
+
+										<div class="dropdown-menu dropdown-menu-left">
+
+											<a class="dropdown-item" href="{{path('first')}}">Dodaj aukcję</a>
+
+											<a class="dropdown-item" href="{{path('second')}}">Użytkownicy</a>
+
+											<a class="dropdown-item" href="{{path('thrid')}}">Użytkownicy</a>
+										</div>
+
+								</li>
+
+							
+					
+                                </ul>
+
+
+					</div>
 
 
 					</div>
