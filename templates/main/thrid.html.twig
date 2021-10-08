@@ -28,9 +28,9 @@
   </thead>
   <tbody id="hed">
      {% for r in recs %} 
-     <tr>
+     <tr class="{% if loop.index%2 == 0 %}">
         <td>{{r.requestedAt|date('H:m d-m-Y')}}</td>
-        <td>{{r.sourceText}}</td>
+        <td>{{r.souceText}}</td>
         <td>{{r.recognitions[0].recognizedLang}}</td>
         <td>{{r.recognitions[0].isReliable}}</td>
         <td>{{r.recognitions[0].confidenceScore}}</td>
@@ -79,10 +79,6 @@ function request()
             console.log(json);
 
             let trc = '';
-
-            
-
-    
             
             json.data.detections.forEach(function(detection) 
             {

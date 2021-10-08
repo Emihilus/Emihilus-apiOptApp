@@ -23,7 +23,7 @@ class SavedLanguageRecognitionRequestRepository extends ServiceEntityRepository
     {
        return $this->createQueryBuilder('s')
             ->leftJoin('s.recognitions', 'r')
-            ->addSelect('s.recognition')
+            ->addSelect('r')
             ->getQuery()
             ->getResult()
         ;
