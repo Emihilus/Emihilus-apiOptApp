@@ -12,15 +12,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MainController extends AbstractController
 {
     /**
-     * @Route("/", name="main")
+     * @Route("/", name="home")
      */
     public function index(): Response
+    {
+
+        return $this->render('main/index.html.twig', [
+            'controller_name' => 'MainController'
+        ]);
+    }
+
+    /**
+     * @Route("/first", name="first")
+     */
+    public function indexs(): Response
     {
         $em = $this->getDoctrine()->getManager();
         $opts = $em->getRepository(OptAd::class)->findAll();
 
-        return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
+        return $this->render('main/first.html.twig', [
             'opts' => $opts
         ]);
     }
@@ -44,14 +54,13 @@ class MainController extends AbstractController
         }
 
         return $this->render('main/second.html.twig', [
-            'controller_name' => 'MainController',
             'measurements' => $measurements,
             'stations' => $stations
         ]);
     }
 
     /**
-     * @Route("/thr", name="thr")
+     * @Route("/thrid", name="thrid")
      */
     public function thr(): Response
     {
@@ -59,7 +68,6 @@ class MainController extends AbstractController
         $recs = $em->getRepository(SavedLanguageRecognitionRequest::class)->findAllWithRecognitions();
 
         return $this->render('main/thrid.html.twig', [
-            'controller_name' => 'MainController',
             'recs' => $recs
         ]);
     }
