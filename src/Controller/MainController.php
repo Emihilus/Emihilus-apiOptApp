@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\OptAd;
+use App\Repository\SavedIMGWMeasurementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,7 +30,7 @@ class MainController extends AbstractController
     public function sec(): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $opts = $em->getRepository(OptAd::class)->findAll();
+        $measurements = $em->getRepository(SavedIMGWMeasurementRepository::class)->findAll();
 
         $url = "https://danepubliczne.imgw.pl/api/data/synop";
 
@@ -43,7 +44,7 @@ class MainController extends AbstractController
 
         return $this->render('main/second.html.twig', [
             'controller_name' => 'MainController',
-            'opts' => $opts,
+            'measurements' => $measurements,
             'stations' => $stations
         ]);
     }

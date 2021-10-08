@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Exception;
 use App\Entity\OptAd;
+use App\Entity\SavedIMGWMeasurement;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -78,29 +79,23 @@ class AJAXPartsController extends AbstractController
             return new Response('0');
         }
 
-        /*$em = $this->getDoctrine()->getManager();
         $apiJson = json_decode($data);
-        foreach ($apiJson->data as $row) 
-        {
-            $opt = new OptAd;
-            $opt->setCurrency($json->currency);
-            $opt->setUrls($row[0]);
-            $opt->setTags($row[1]);
-            $opt->setDate($row[2]);
-            $opt->setEstimatedRevenue($row[3]);
-            $opt->setAdImpressions($row[4]);
-            $opt->setAdEcpm($row[5]);
-            $opt->setClicks($row[6]);
-            $opt->setAdCtr($row[7]);
-            
-            $em->persist($opt);
-        }
-
-
-        $em->flush();*/
+        $em = $this->getDoctrine()->getManager();
         
-
-
+        $measurement = new SavedIMGWMeasurement;
+        $measurement->setStationId($apiJson->id_stacji);
+        $measurement->setStation($apiJson->stacja);
+        $measurement->setDate($apiJson->data_pomiaru." ".$apiJson->godzina_pomiaru);
+        $measurement->setTemp($apiJson->temperatura);
+        $measurement->setWindDir($apiJson->kierunek_wiatru);
+        $measurement->setWindSpeed($apiJson->predkosc_wiatru);
+        $measurement->setRelativeHumidity($apiJson->wilgotnosc_wzgledna);
+        $measurement->setDropSum($apiJson->suma_opadow);
+        $measurement->setPressure($apiJson->cisnienie);
+        
+        $em->persist($measurement);
+        $em->flush();
+        
         return new JsonResponse ($data);
     }
 

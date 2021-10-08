@@ -39,18 +39,18 @@
     </tr>
   </thead>
   <tbody id="hed">
-     {% for opt in opts %} 
+     {% for m in measurements %} 
      <tr>
-        <td>{{opt.requestedAt|date('H:m d-m-Y')}}</td>
-        <td>{{opt.currency}}</td>
-        <td>{{opt.urls}}</td>
-        <td>{{opt.Tags}}</td>
-        <td>{{opt.date}}</td>
-        <td>{{opt.estimatedRevenue}}</td>
-        <td>{{opt.adImpressions}}</td>
-        <td>{{opt.adEcpm}}</td>
-        <td>{{opt.clicks}}</td>
-        <td>{{opt.adCtr}}</td>
+        <td>{{m.requestedAt|date('H:m d-m-Y')}}</td>
+        <td>{{o}}</td>
+        <td>{{m.urls}}</td>
+        <td>{{m.Tags}}</td>
+        <td>{{m.date}}</td>
+        <td>{{m.estimatedRevenue}}</td>
+        <td>{{m.adImpressions}}</td>
+        <td>{{m.adEcpm}}</td>
+        <td>{{m.clicks}}</td>
+        <td>{{m.adCtr}}</td>
     </tr>
     {% endfor %}
   </tbody>

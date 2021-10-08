@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=SavedIMGWMeasurementRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class SavedIMGWMeasurement
 {
@@ -61,6 +62,11 @@ class SavedIMGWMeasurement
      * @ORM\Column(type="string", length=255)
      */
     private $pressure;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $requested_at;
 
     public function getId(): ?int
     {
@@ -173,5 +179,25 @@ class SavedIMGWMeasurement
         $this->pressure = $pressure;
 
         return $this;
+    }
+
+    public function getRequestedAt(): ?\DateTimeInterface
+    {
+        return $this->requested_at;
+    }
+
+    public function setRequestedAt(\DateTimeInterface $requested_at): self
+    {
+        $this->requested_at = $requested_at;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function autoSetRequestedAt()
+    {
+        $this->requested_at = new \DateTime();
     }
 }
