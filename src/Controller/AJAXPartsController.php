@@ -67,8 +67,7 @@ class AJAXPartsController extends AbstractController
     public function indexa(Request $request): Response
     {
         $json = json_decode($request->getContent());
-        $url = "https://danepubliczne.imgw.pl/api/data/synop/sa"
-        dump($url);
+        $url = "https://danepubliczne.imgw.pl/api/data/synop/id/".$json->stationid;
         try
         {
             $data = file_get_contents($url);
@@ -78,7 +77,7 @@ class AJAXPartsController extends AbstractController
             return new Response('0');
         }
 
-        $em = $this->getDoctrine()->getManager();
+        /*$em = $this->getDoctrine()->getManager();
         $apiJson = json_decode($data);
         foreach ($apiJson->data as $row) 
         {
@@ -97,7 +96,7 @@ class AJAXPartsController extends AbstractController
         }
 
 
-        $em->flush();
+        $em->flush();*/
         
 
 
