@@ -25,7 +25,6 @@ class SavedLanguageRecognitionRequestRepository extends ServiceEntityRepository
             ->leftJoin('s.recognitions', 'r')
             ->addSelect('r')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 }

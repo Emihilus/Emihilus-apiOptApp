@@ -36,7 +36,7 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/sec", name="second")
+     * @Route("/second", name="second")
      */
     public function sec(): Response
     {

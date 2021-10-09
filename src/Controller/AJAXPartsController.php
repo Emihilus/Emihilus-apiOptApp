@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\ApiKeyHidden;
+use App\ApiKey;
 use App\Entity\OptAd;
 use App\Entity\SavedIMGWMeasurement;
 use App\Entity\SavedLanguageRecognitionDetection;
@@ -21,7 +21,7 @@ class AJAXPartsController extends AbstractController
     /**
      * @Route("/getOptAd360", name="getOptAd360", methods={"POST"})
      */
-    public function index(Request $request): Response
+    public function getOptAd360(Request $request): Response
     {
         $json = json_decode($request->getContent());
         $url = "https://api.optad360.com/get?key=HJGHcZvJHZhjgew6qe67q6GHcZv3fdsAqxbvB33fdV&startDate=2021-08-11&endDate=2021-08-11&output=json&currency=".$json->currency;
@@ -52,23 +52,15 @@ class AJAXPartsController extends AbstractController
             
             $em->persist($opt);
         }
-
-
         $em->flush();
         
-
-
         return new Response ($data);
-
-        /*return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
-        ]);*/
     }
 
     /**
      * @Route("/getIMGW", name="getIMGW", methods={"POST"})
      */
-    public function indexa(Request $request): Response
+    public function getIMGW(Request $request): Response
     {
         $json = json_decode($request->getContent());
         $url = "https://danepubliczne.IMGW.pl/api/data/synop/id/".$json->stationid;
@@ -105,20 +97,20 @@ class AJAXPartsController extends AbstractController
 
 
     /**
-     * @Route("/lng", name="lng", methods={"POST"})
+     * @Route("/getLng", name="getLng", methods={"POST"})
      */
-    public function indeaxa(Request $request): Response
+    public function getLng(Request $request): Response
     {
         header('Content-Type: application/json');
         $ch = curl_init('https://ws.detectlanguage.com/0.2/detect');
-        $authorization = "Authorization: Bearer ".ApiKeyHidden::KEY; // Delegate key to separate class file due to avoid of exposing it on GitHub
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $authorization )); // Inject the token into the header
+        $authorization = "Authorization: Bearer ".ApiKey::KEY; // Delegate key to separate class file due to avoid of exposing it on GitHub
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $authorization ));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, 1); // Specify the request method as POST
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $request->getContent()); // Set the posted fields
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); // This will follow any redirects
-        $result = curl_exec($ch); // Execute the cURL statement
-        curl_close($ch); // Close the cURL connection
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $request->getContent());
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        $result = curl_exec($ch);
+        curl_close($ch);
 
         $apiJson = json_decode($result);
         $em = $this->getDoctrine()->getManager();
