@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\OptAdRepository;
 use Doctrine\ORM\Mapping as ORM;
+// Fields with floating point variables are stored as string types to avoid possible problems with floating point precision number
 
 /**
  * @ORM\Entity(repositoryClass=OptAdRepository::class)

@@ -1,58 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}Hello MainController!
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 1000px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 
-    #hed{font-size: 14px;}
-</style>
+	<div class="example-wrapper">
+		<h1>DetectLanguage API</h1>
+		<a href="https://detectlanguage.com/">https://detectlanguage.com/</a>
+		<hr>
+		<span>Table below holds previoulsy saved results from API. Click Send button to make new request and store it in this history.</span>
+		<hr>
+		<label for='inp'>Type text for language recognition</label><br>
+		<textarea class="form-control rounded-0" name='inp' id="input" rows="3"></textarea>
+		<button class="btn btn-primary mt-3" onclick="request()">Send Recognition Request & write to database</button>
 
-<div class="example-wrapper">
-    <h1>DetectLanguage API</h1> <a href="https://detectlanguage.com/">https://detectlanguage.com/</a> <hr> <span>Table below holds previoulsy saved results from API. Click Send button to make new request and store it in this history.</span> <br>
-    <label for='inp'>Type text for language recognition</label><br>
-	<textarea cols="50" name='inp' id="input" rows="3"></textarea><br>
-    <button class="btn btn-primary my-auto" onclick="request()">Send Recognition Request & write to database</button>
+		<div class="table-responsive">
+			<table class="mt-3 mb-0 table table-secondary table-hover">
+				<theadclass="thead-dark">
+					<tr>
+						<th scope="col">Requested At</th>
+						<th scope="col">Source Text</th>
+						<th scope="col">Recognized language</th>
+						<th scope="col">isReliable</th>
+						<th scope="col">Confidence score</th>
+					</tr>
+				</thead>
+				<tbody id="hed">
+					{% for r in recs|reverse %}
+						<tr class="{% if loop.index%2 == 0 %}{% set bg = 'table-warning' %}{% else %}{% set bg = 'table-success' %}{% endif %}{{bg}}">
+							<td>{{r.requestedAt|date('H:m d-m-Y')}}</td>
+							<td>{{r.sourceText}}</td>
+							<td>{{r.recognitions[0].recognizedLang}}</td>
+							<td>
+								{% if r.recognitions[0].isReliable == 1 %}yes{% else %}no
+								{% endif %}
+							</td>
+							<td>{{r.recognitions[0].confidenceScore}}</td>
+						</tr>
+						{% for ro in r.recognitions %}
+							{% if loop.index != 1 %}
+								<tr class="{{bg}}">
+									<td></td>
+									<td></td>
+									<td>{{ro.recognizedLang}}</td>
+									<td>
+										{% if ro.isReliable == 1 %}yes{% else %}no
+										{% endif %}
+									</td>
+									<td>{{ro.confidenceScore}}</td>
+								</tr>
+							{% endif %}
+						{% endfor %}
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
 
-<table class="mt-3 table table-secondary table-hover">
-  <theadclass="thead-dark">
-    <tr>
-      <th scope="col">Requested At</th>
-      <th scope="col">Source Text</th>
-      <th scope="col">Recognized language</th>
-      <th scope="col">isReliable</th>
-      <th scope="col">Confidence score</th>
-    </tr>
-  </thead>
-  <tbody id="hed">
-     {% for r in recs|reverse %} 
-     <tr class="{% if loop.index%2 == 0 %}{% set bg = 'table-warning' %}{% else %}{% set bg = 'table-success' %}{% endif %}{{bg}}">
-        <td>{{r.requestedAt|date('H:m d-m-Y')}}</td>
-        <td>{{r.souceText}}</td>
-        <td>{{r.recognitions[0].recognizedLang}}</td>
-        <td>{% if r.recognitions[0].isReliable == 1 %}yes{% else %}no{% endif %}</td>
-        <td>{{r.recognitions[0].confidenceScore}}</td>
-    </tr>
-      {% for ro in r.recognitions %}
-        {% if loop.index != 1 %}
-          <tr class="{{bg}}">
-            <td></td>
-            <td></td>
-            <td>{{ro.recognizedLang}}</td>
-            <td>{% if ro.isReliable == 1 %}yes{% else %}no{% endif %}</td>
-            <td>{{ro.confidenceScore}}</td>
-        </tr>
-        {% endif %}
-      {% endfor %}
-    {% endfor %}
-  </tbody>
-</table>
-
-
-</div>
+	</div>
 {% endblock %}
+
 
 {% block javascripts %}
 {{ parent() }}

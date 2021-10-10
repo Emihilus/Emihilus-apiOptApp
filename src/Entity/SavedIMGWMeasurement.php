@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SavedIMGWMeasurementRepository;
 use Doctrine\ORM\Mapping as ORM;
+// Fields with floating point variables are stored as string types to avoid possible problems with floating point precision number
 
 /**
  * @ORM\Entity(repositoryClass=SavedIMGWMeasurementRepository::class)
@@ -24,17 +25,17 @@ class SavedIMGWMeasurement
     private $station_id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=30)
      */
     private $station;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=30)
      */
     private $date;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=16)
      */
     private $temp;
 
@@ -49,17 +50,17 @@ class SavedIMGWMeasurement
     private $wind_speed;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=25)
      */
     private $relative_humidity;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=25)
      */
     private $drop_sum;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=20)
      */
     private $pressure;
 

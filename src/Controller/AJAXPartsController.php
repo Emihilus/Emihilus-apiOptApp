@@ -115,7 +115,7 @@ class AJAXPartsController extends AbstractController
 
         
         $savedRequest = new SavedLanguageRecognitionRequest;
-        $savedRequest->setSouceText(json_decode($request->getContent())->q);
+        $savedRequest->setSourceText(json_decode($request->getContent())->q);
         
         foreach ($apiJson->data->detections as $detection) 
         {

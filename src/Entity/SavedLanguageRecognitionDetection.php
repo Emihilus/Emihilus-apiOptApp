@@ -28,7 +28,7 @@ class SavedLanguageRecognitionDetection
     private $isReliable;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=20)
      */
     private $confidence_score;
 

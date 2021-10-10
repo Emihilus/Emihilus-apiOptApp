@@ -6,6 +6,7 @@ use App\Repository\SavedLanguageRecognitionRequestRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+// Fields with floating point variables are stored as string types to avoid possible problems with floating point precision number
 
 /**
  * @ORM\Entity(repositoryClass=SavedLanguageRecognitionRequestRepository::class)
@@ -23,7 +24,7 @@ class SavedLanguageRecognitionRequest
     /**
      * @ORM\Column(type="text")
      */
-    private $souce_text;
+    private $source_text;
 
     /**
      * @ORM\Column(type="datetime")
@@ -45,14 +46,14 @@ class SavedLanguageRecognitionRequest
         return $this->id;
     }
 
-    public function getSouceText(): ?string
+    public function getSourceText(): ?string
     {
-        return $this->souce_text;
+        return $this->source_text;
     }
 
-    public function setSouceText(string $souce_text): self
+    public function setSourceText(string $source_text): self
     {
-        $this->souce_text = $souce_text;
+        $this->source_text = $source_text;
 
         return $this;
     }
