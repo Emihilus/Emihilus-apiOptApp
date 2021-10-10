@@ -101,7 +101,13 @@ class AJAXPartsController extends AbstractController
     {
         header('Content-Type: application/json');
         $ch = curl_init('https://ws.detectlanguage.com/0.2/detect');
-        $authorization = "Authorization: Bearer ".ApiKey::KEY; // Delegate key to separate class file due to avoid of exposing it on GitHub
+
+        if($this->getParameter('kernel.environment') == 'heroku' )
+            $key = $_SERVER['HEROKU_DL_APIKEY'];
+        else
+            $key = ApiKey::KEY;
+
+        $authorization = "Authorization: Bearer ".$key; // Delegate key to separate class file due to avoid of exposing it on GitHub
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $authorization ));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, 1);
