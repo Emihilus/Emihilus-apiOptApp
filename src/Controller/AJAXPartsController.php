@@ -25,7 +25,7 @@ class AJAXPartsController extends AbstractController
     {
         $json = json_decode($request->getContent());
         $url = "https://api.optad360.com/get?key=HJGHcZvJHZhjgew6qe67q6GHcZv3fdsAqxbvB33fdV&startDate=2021-08-11&endDate=2021-08-11&output=json&currency=".$json->currency;
-        dump($url);
+        // dump($url);
         try
         {
             $data = file_get_contents($url);
@@ -76,7 +76,7 @@ class AJAXPartsController extends AbstractController
         $apiJson = json_decode($data);
         $em = $this->getDoctrine()->getManager();
         
-        dump($apiJson);
+        // dump($apiJson);
 
         $measurement = new SavedIMGWMeasurement;
         $measurement->setStationId($apiJson->id_stacji)
@@ -114,7 +114,7 @@ class AJAXPartsController extends AbstractController
 
         $apiJson = json_decode($result);
         $em = $this->getDoctrine()->getManager();
-        dump($apiJson);
+        // dump($apiJson);
         
         $savedRequest = new SavedLanguageRecognitionRequest;
         $savedRequest->setSouceText(json_decode($request->getContent())->q);
