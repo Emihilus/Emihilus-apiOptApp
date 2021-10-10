@@ -8,5 +8,6 @@
 /var/cache/
 /var/log/
 /vendor/
-/gct
 ###< symfony/framework-bundle ###
+/gct
+/src/ApiKey.php
