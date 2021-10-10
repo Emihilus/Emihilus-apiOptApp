@@ -107,7 +107,7 @@ class AJAXPartsController extends AbstractController
         else
             $key = ApiKey::KEY;
 
-        $authorization = "Authorization: Bearer ".$key; // Delegate key to separate class file due to avoid of exposing it on GitHub
+        $authorization = "Authorization: Bearer ".$key; // Delegating key to separate class file due to avoid of exposing it on GitHub
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $authorization ));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, 1);
