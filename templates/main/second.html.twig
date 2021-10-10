@@ -81,7 +81,7 @@ function request()
             let json = JSON.parse(res);
             console.log(json);
             
-            let tdHtml = `<td scope="row">now (frontend)</td><td scope="row">${json.id_stacji}</td><td scope="row">${json.stacja}</td><td scope="row">${json.data_pomiaru} ${json.godzina_pomiaru}</td><td scope="row">${json.temperatura}</td><td scope="row">${json.kierunek_wiatru}</td><td scope="row">${json.predkosc_wiatru}</td><td scope="row">${json.wilgotnosc_wzgledna}</td><td scope="row">${json.suma_opadu}</td><td scope="row">${json.cisnienie}</td>`;
+            let tdHtml = `<td scope="row">now (frontend)</td><td scope="row">${json.id_stacji}</td><td scope="row">${json.stacja}</td><td scope="row">${json.data_pomiaru} ${json.godzina_pomiaru}</td><td scope="row">${json.temperatura}</td><td scope="row">${json.kierunek_wiatru}</td><td scope="row">${json.predkosc_wiatru}</td><td scope="row">${json.wilgotnosc_wzgledna}</td><td scope="row">${json.suma_opadu}</td><td scope="row">`+json.cisnienie == null ? 'unknown' : json.cisnienie + `</td>`;
                
 
             let trc = document.createElement('tr');
