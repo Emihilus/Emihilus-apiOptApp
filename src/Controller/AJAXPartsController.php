@@ -13,9 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-    /**
-     * @Route("/ajax")
-     */
+/**
+ * @Route("/ajax")
+ */
 class AJAXPartsController extends AbstractController
 {
     /**
@@ -24,7 +24,13 @@ class AJAXPartsController extends AbstractController
     public function getOptAd360(Request $request): Response
     {
         $json = json_decode($request->getContent());
-        $url = "https://api.optad360.com/get?key=HJGHcZvJHZhjgew6qe67q6GHcZv3fdsAqxbvB33fdV&startDate=2021-08-11&endDate=2021-08-11&output=json&currency=".$json->currency;
+
+        if($this->getParameter('kernel.environment') == 'heroku' )
+            $key = $_SERVER['HEROKU_OPT_APIKEY'];
+        else
+            $key = ApiKey::OPT_KEY;
+
+        $url = "https://api.optad360.com/get?key=$key&startDate=2021-08-11&endDate=2021-08-11&output=json&currency=".$json->currency;
 
         try
         {
