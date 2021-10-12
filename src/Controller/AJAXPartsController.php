@@ -26,7 +26,7 @@ class AJAXPartsController extends AbstractController
         $json = json_decode($request->getContent());
 
         if($this->getParameter('kernel.environment') == 'heroku' )
-            $key = $_SERVER['HEROKU_OPT_APIKEY'];
+            $key = $_SERVER['HEROKU_OPT_APIKEY'];   
         else
             $key = ApiKey::OPT_KEY;
 
